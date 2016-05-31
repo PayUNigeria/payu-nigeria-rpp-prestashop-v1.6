@@ -1,3 +1,7 @@
+<p align="center">
+<img src="https://cloud.githubusercontent.com/assets/5717025/15674295/335fa446-273c-11e6-9db1-76c1b89d153d.jpg" alt="1">
+</p>
+
 # payu-mea-rpp-prestashop-v1.6
 PayU's updated plugin for PrestaShop v1.6.x.x.
 
