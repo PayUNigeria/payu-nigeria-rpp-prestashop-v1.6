@@ -28,7 +28,7 @@ class payu extends PaymentModule
 		$this->currencies = true;
 		$this->currencies_mode = 'radio';
 		$this->compatibility = '1.6.';
-		$this->limited_countries = array('ZA');
+		$this->limited_countries = array('NG');
 
 		if (!extension_loaded('soap'))
 			$this->warning = $this->l('SOAP extension must be enabled on your server to use this module.');
@@ -49,13 +49,13 @@ class payu extends PaymentModule
 		OR !$this->installCurrency()
 		OR !$this->installOrderState()
 		OR !Configuration::updateValue('PAYU_MERCHANT_REF', '7')
-		OR !Configuration::updateValue('PAYU_SAFE_KEY', '{CE62CE80-0EFD-4035-87C1-8824C5C46E7F}')
-		OR !Configuration::updateValue('PAYU_SOAP_USERNAME', '100032')
-		OR !Configuration::updateValue('PAYU_SOAP_PASSWORD', 'PypWWegU')
+		OR !Configuration::updateValue('PAYU_SAFE_KEY', '{A580B3C7-3EF3-47F1-9B90-4047CE0EC54C}')
+		OR !Configuration::updateValue('PAYU_SOAP_USERNAME', '200208')
+		OR !Configuration::updateValue('PAYU_SOAP_PASSWORD', 'g1Kzk8GY')
 		OR !Configuration::updateValue('PAYU_3DS_ENABLED', 0)
 		OR !Configuration::updateValue('PAYU_SHOW_BUDGET', 0)
 		OR !Configuration::updateValue('PAYU_PAYMENT_METHODS', 'CREDITCARD')
-		OR !Configuration::updateValue('PAYU_CURRENCY', 'ZAR')
+		OR !Configuration::updateValue('PAYU_CURRENCY', 'NGN')
 		OR !Configuration::updateValue('PAYU_SERVER_MODE', 0)
 		OR !Configuration::updateValue('PAYU_TRANSACTION_TYPE', 'PAYMENT')
 		OR !Configuration::updateValue('PAYU_REDIRECT_URL', '')
@@ -90,13 +90,13 @@ class payu extends PaymentModule
 	{
 		//Check if rands are installed and install and refresh if not
 		$currency = new Currency();
-		$currency_rand_id  = $currency->getIdByIsoCode('ZAR');
+		$currency_rand_id  = $currency->getIdByIsoCode('NGN');
 
 		if(!$currency_rand_id){
-			$currency->name = "South African Rand";
-			$currency->iso_code = "ZAR";
-			$currency->iso_code_num = '710';
-			$currency->sign = "R";
+			$currency->name = "Nigeria Naira";
+			$currency->iso_code = "NGN";
+			$currency->iso_code_num = '566';
+			$currency->sign = "NGN";
 			$currency->format = 1;
 			$currency->blank = 1;
 			$currency->decimals = 1;
@@ -467,6 +467,7 @@ class payu extends PaymentModule
 		$setTransactionArray['AdditionalInformation']['cancelUrl'] = Tools::getShopDomainSsl(true, true).__PS_BASE_URI__.'index.php?controller=order';
 		$setTransactionArray['AdditionalInformation']['returnUrl'] = Context::getContext()->link->getModuleLink('payu', 'validation');
 		$setTransactionArray['AdditionalInformation']['supportedPaymentMethods'] = $PAYU_PAYMENT_METHODS;
+		$setTransactionArray['AdditionalInformation']['redirectChannel'] = 'responsive';
 
 		$setTransactionArray['Basket']['description'] = $PAYU_BASKET_DESC;
 		$setTransactionArray['Basket']['amountInCents'] =(int)((number_format(Tools::convertPrice($params['cart']->getOrderTotal(true, Cart::BOTH), $currency), 2, '.', '')) * 100);
